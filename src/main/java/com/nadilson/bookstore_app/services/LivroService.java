@@ -48,4 +48,9 @@ public class LivroService {
 		newObj.setNomeAutor(obj.getNomeAutor());
 		newObj.setTexto(obj.getTexto());		
 	}
+
+	public void delete(Integer id) {
+		Livro obj = findById(id);
+     	livroRepository.delete(obj);
+	}
 }
