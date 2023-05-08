@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nadilson.bookstore_app.domain.Categoria;
 import com.nadilson.bookstore_app.domain.Livro;
 import com.nadilson.bookstore_app.repositories.LivroRepository;
 import com.nadilson.bookstore_app.services.exceptions.ObjectNotFoundException;
@@ -29,6 +30,13 @@ public class LivroService {
 		return livroRepository.findAllByCategoria(id_cat);
 	}
 	
+	public Livro create(Integer id_cat, Livro obj) {
+		obj.setId(null);
+		Categoria categoria = categoriaService.findById(id_cat);
+		obj.setCategoria(categoria);
+		return livroRepository.save(obj);
+	}
+
 	public Livro update(Integer id, Livro obj) {
 		Livro newObj = findById(id);
 		updateData(newObj, obj);
